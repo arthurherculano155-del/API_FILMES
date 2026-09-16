@@ -1,12 +1,15 @@
 import "dotenv/config";
+
 import express from 'express';
 import cors from 'cors';
-import multer from "multer";
+
+import addRoutes from "./routes.js";
 
 const api = express();
 api.use(express.json());
 api.use(cors());
-api.use(multer);
+
+addRoutes(api);
 
 const port = process.env.PORT;
 
