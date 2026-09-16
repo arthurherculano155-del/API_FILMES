@@ -1,3 +1,5 @@
+import './Utils/global.js'
+
 import "dotenv/config";
 
 import express from 'express';
@@ -14,5 +16,6 @@ addRoutes(api);
 const port = process.env.PORT;
 
 api.listen(port, () => {
-    console.log(`API rodando na porta ${port}`
-)});
+    console.log(`API rodando na porta ${port}`)
+    console.log(`${dateTime()}`);
+});
