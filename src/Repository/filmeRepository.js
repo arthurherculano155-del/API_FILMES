@@ -15,3 +15,14 @@ export async function salvarFilme(filme){
 
     return resposta.insertId;
 }
+
+export default function ListarFilmes(id){
+    let command = `
+        select * from filme
+        where id = ?
+    `
+
+    let resposta = await con.query(command, [id]);
+
+    return resposta;
+} 

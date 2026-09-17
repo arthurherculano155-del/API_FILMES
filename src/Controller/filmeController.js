@@ -10,4 +10,10 @@ endpoints.post('/filme/postar', async (req, resp) => {
     resp.send({id});
 })
 
+endpoints.get("/filmes/listar/:id", async (req, resp) => {
+    let id = req.params.id;
+
+    let resposta = await DBFilmes.ListarFilmes(id);
+})
+
 export default endpoints;
