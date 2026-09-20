@@ -16,24 +16,12 @@ export async function salvarFilme(filme){
     return resposta.insertId;
 }
 
-export async function listarFilmes(id){
-    let command = `
-        select * from filme
-        where id = ?
-    `
-
-    let resposta = await con.query(command, [id]);
-
-    return resposta[0];
-}
-
 export async function deleteFilme(id){
     let command = `
         delete from filme
         where id = ?
     `
-
-    let resposta = await con.query(command, [id]);
+    let [resposta] = await con.query(command, [id]);
 
     return resposta[0];
 }

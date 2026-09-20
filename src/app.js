@@ -1,5 +1,7 @@
 import "dotenv/config";
+
 import "./Utils/datetime.js"
+import './Utils/global.js'
 
 import express from 'express';
 import cors from 'cors';
@@ -16,5 +18,6 @@ const port = process.env.PORT;
 
 api.listen(port, () => {
     console.log(`API rodando na porta ${port}`)
+    
     console.log("\n" + Agora())
 });
