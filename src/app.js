@@ -1,4 +1,5 @@
 import "dotenv/config";
+import "./Utils/datetime.js"
 
 import express from 'express';
 import cors from 'cors';
@@ -14,5 +15,6 @@ addRoutes(api);
 const port = process.env.PORT;
 
 api.listen(port, () => {
-    console.log(`API rodando na porta ${port}`
-)});
+    console.log(`API rodando na porta ${port}`)
+    console.log("\n" + Agora())
+});

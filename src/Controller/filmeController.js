@@ -1,19 +1,38 @@
-import * as DBFilmes from '../Repository/filmeRepository.js'
 import { Router } from 'express';
+import { deletarFilmeService, salvarFilmeService } from '../Service/Filme/filme.js';
+import { deletarFilmeValidation, salvarFilmeValidation } from '../Validation/Filme/filmeValidation.js';
 let endpoints = Router();
 
 endpoints.post('/filme/postar', async (req, resp) => {
-    let filme = req.body;
+    try {
+        let filme = req.body;
+        let id = await salvarFilmeService(filme)
 
-    let id = await DBFilmes.salvarFilme(filme);
-    
-    resp.send({id});
-})
+        resp.send({ id });
+    }
+    catch (err) {
+        resp.status(400).send({
+            erro: salvarFilmeValidation(filme)
+        })
+    }
+});
 
-endpoints.get("/filmes/listar/:id", async (req, resp) => {
-    let id = req.params.id;
+endpoints.delete('/filme/deletar/:id', async (req, resp) => {
+    let id = req.params.id
 
-    let resposta = await DBFilmes.ListarFilmes(id);
+    try {
+        let response = await deletarFilmeService(id)
+
+        resp.send({
+            resposta: `Filme com id ${id} foi deletado!`
+        })
+    }
+    catch (err) {
+        resp.status(400).send({
+            erro: deletarFilmeValidation(id)
+        })
+    }
+
 })
 
 export default endpoints;
