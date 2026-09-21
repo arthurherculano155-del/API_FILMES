@@ -21,7 +21,29 @@ export async function deleteFilme(id){
         delete from filme
         where id = ?
     `
-    let [resposta] = await con.query(command, [id]);
+    let [resposta] = await con.query(command, id);
+
+    return resposta[0];
+}
+
+export async function getFilme(nome){
+    let command = `
+        select id, nome, lancamento, disponivel from filme
+        where nome like ?
+    `
+
+    let resposta = await con.query(command, [`%${nome}%`])
+
+    return resposta[0];
+}
+
+export async function getFilmeID(id){
+    let command = `
+        select * from filme
+        where id = ?
+    `
+
+    let resposta = await con.query(command, [id]);
 
     return resposta[0];
 }
